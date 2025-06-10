@@ -1,4 +1,4 @@
-package spring_beans_usage
+package spring_context_usage.beans
 
 import org.junit.jupiter.api.assertAll
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor

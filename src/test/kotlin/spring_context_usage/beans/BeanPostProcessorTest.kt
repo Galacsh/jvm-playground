@@ -1,4 +1,4 @@
-package spring_beans_usage
+package spring_context_usage.beans
 
 import org.springframework.beans.factory.config.BeanPostProcessor
 import org.springframework.beans.factory.support.DefaultListableBeanFactory

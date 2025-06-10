@@ -1,4 +1,4 @@
-package spring_beans_usage
+package spring_context_usage.beans
 
 import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.support.BeanDefinitionReader
@@ -29,7 +29,7 @@ class BeanDefinitionReaderTest {
     @Test
     fun `XML 파일로부터 2개의 빈 정의를 읽는다`() {
         // Given
-        val resource = ClassPathResource("spring_beans_usage/beans.xml")
+        val resource = ClassPathResource("spring_context_usage/beans/beans.xml")
 
         // When
         val beansCount = definitionReader.loadBeanDefinitions(resource)
@@ -41,7 +41,7 @@ class BeanDefinitionReaderTest {
     @Test
     fun `읽은 빈 정의들을 토대로 빈을 생성할 수 있다`() {
         // Given
-        val resource = ClassPathResource("spring_beans_usage/beans.xml")
+        val resource = ClassPathResource("spring_context_usage/beans/beans.xml")
         definitionReader.loadBeanDefinitions(resource)
 
         // When
