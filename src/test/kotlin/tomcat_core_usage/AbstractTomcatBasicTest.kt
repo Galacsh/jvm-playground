@@ -1,19 +1,12 @@
 package tomcat_core_usage
 
-import jakarta.servlet.http.HttpServlet
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
-import org.apache.catalina.startup.Tomcat
-import java.io.File
+import org.junit.jupiter.api.BeforeAll
+import tomcat_core_usage.servlets.SampleSimpleServlet
 import java.net.URI
 import java.net.http.HttpClient
+import java.net.http.HttpClient.Redirect
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
-import java.util.logging.Level
-import java.util.logging.Logger
-import kotlin.io.path.createTempDirectory
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -66,63 +59,33 @@ import kotlin.test.assertEquals
  *     - 절대 경로인 경우 appBase 와는 무관
  *     - contextPath 와 매핑되어 요청을 처리하는 서블릿이 위치하는 곳
  */
-class TomcatBasicTest {
-    private val port = 8080
-    private val contextPath = ""
-    private lateinit var docBaseDir: File
-    private lateinit var docBase: String
-    private lateinit var tomcat: Tomcat
-
+abstract class AbstractTomcatBasicTest {
     @Test
     fun `Tomcat 서버를 실행하고 등록한 서블릿이 정상적으로 응답한다`() {
         // Given
+        val port = SharedTomcat.port
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:$port"))
+            .uri(URI.create("http://localhost:$port/hello"))
             .build()
 
         // When
-        val response = HttpClient.newHttpClient()
+        val response = HttpClient.newBuilder()
+            .followRedirects(Redirect.NORMAL)
+            .build()
             .send(request, HttpResponse.BodyHandlers.ofString())
 
         // Then
         assertEquals("Hello, world!", response.body())
     }
 
-    // ===== 톰캣 초기화 및 정리 =====
-
-    @BeforeTest
-    fun setup() {
-        Logger.getLogger("org.apache.catalina").level = Level.SEVERE
-
-        docBaseDir = createTempDirectory("tomcat_test").toFile().apply { mkdirs() }
-        docBase = docBaseDir.absolutePath
-
-        tomcat = Tomcat().apply {
-            setPort(port)
-            setSilent(true)
-            addContext(contextPath, docBase)
-            addServlet(contextPath, "HelloServlet", HelloServlet())
-                .apply { addMapping("/") }
-
-            // Tomcat 9 부터는 getConnector() 를 명시적으로 호출해야 커넥터를 생성하고 초기화함
-            getConnector()
-            start()
-        }
-    }
-
-    @AfterTest
-    fun tearDown() {
-        tomcat.stop()
-        tomcat.destroy()
-        docBaseDir.deleteRecursively()
-    }
-
-    // ===== 테스트용 클래스 =====
-
-    class HelloServlet : HttpServlet() {
-        override fun doGet(req: HttpServletRequest?, resp: HttpServletResponse?) {
-            resp?.contentType = "text/plain;charset=UTF-8"
-            resp?.writer?.print("Hello, world!")
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun setup() {
+            SharedTomcat.addServlet(
+                basePath = "/hello",
+                servlet = SampleSimpleServlet()
+            )
         }
     }
 }
