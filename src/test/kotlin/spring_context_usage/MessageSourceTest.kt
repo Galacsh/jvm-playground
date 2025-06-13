@@ -40,7 +40,6 @@ class MessageSourceTest {
         open fun messageSource(): MessageSource {
             val source = object : ReloadableResourceBundleMessageSource() {
                 override fun loadProperties(resource: Resource, filename: String): Properties {
-                    println("Loading properties from: $filename, (${resource.uri})")
                     return resource.inputStream.use {
                         // YAML 파일 처리
                         if (filename.endsWith(".yaml") || filename.endsWith(".yml")) {
