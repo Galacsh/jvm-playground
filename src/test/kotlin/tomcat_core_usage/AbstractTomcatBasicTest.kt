@@ -1,7 +1,7 @@
 package tomcat_core_usage
 
 import org.junit.jupiter.api.BeforeAll
-import tomcat_core_usage.servlets.SampleSimpleServlet
+import tomcat_core_usage.components.SampleSimpleServlet
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpClient.Redirect
