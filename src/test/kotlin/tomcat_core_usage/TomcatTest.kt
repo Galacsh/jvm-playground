@@ -14,6 +14,9 @@ class TomcatTest {
     @Nested
     inner class ExampleDispatcherServletTest : AbstractExampleDispatcherServletTest()
 
+    @Nested
+    inner class FilterTest : AbstractFilterTest()
+
     companion object {
         @BeforeAll
         @JvmStatic
