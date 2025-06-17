@@ -16,6 +16,15 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ProxyObjectCreationTest {
+
+    /**
+     * [ProxyFactory]는 프록시 객체를 생성하는 데 사용되는 Spring AOP 클래스입니다.
+     * 다만 이 클래스는 Spring IoC 컨테이너에 의존하지 않고 프록시 객체를 생성하는데 초점을 맞추고 있습니다.
+     *
+     * Spring IoC 컨테이너에 팩터리 빈으로써 등록하여 프록시 객체 빈을 생성하려면
+     * [org.springframework.aop.framework.ProxyFactoryBean]를 사용해야 합니다.
+     *
+     */
     @Test
     fun `Programmatic - AOP 프록시 객체를 생성할 수 있다`() {
         // Given
