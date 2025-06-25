@@ -10,23 +10,31 @@ class SampleDispatcherServlet(private val basePath: String = "") : HttpServlet()
             "DELETE", "HEAD", "GET", "OPTIONS", "POST", "PUT", "TRACE"
         )
 
+        private val oneHandlerChain = SampleHandlerChain(
+            object : SampleHandler {
+                override fun handle(req: HttpServletRequest?, resp: HttpServletResponse?) {
+                    resp?.writer?.print("first")
+                }
+            }
+        )
+
+        private val twoHandlerChain = SampleHandlerChain(
+            object : SampleHandler {
+                override fun handle(req: HttpServletRequest?, resp: HttpServletResponse?) {
+                    resp?.writer?.print("first")
+                }
+            }
+        ).apply {
+            addInterceptor(object : SampleHandlerInterceptor {
+                override fun postHandle(req: HttpServletRequest?, resp: HttpServletResponse?) {
+                    resp?.writer?.print("/second")
+                }
+            })
+        }
+
         private val mappingHandlers = mapOf(
-            "/one" to object : SampleHandlerChain() {
-                override fun process(req: HttpServletRequest?, resp: HttpServletResponse?) {
-                    resp?.writer?.print("first")
-                }
-            },
-            "/two" to object : SampleHandlerChain() {
-                override fun process(req: HttpServletRequest?, resp: HttpServletResponse?) {
-                    resp?.writer?.print("first")
-                }
-            }.apply {
-                setNext(object : SampleHandlerChain() {
-                    override fun process(req: HttpServletRequest?, resp: HttpServletResponse?) {
-                        resp?.writer?.print("/second")
-                    }
-                })
-            },
+            "/one" to oneHandlerChain,
+            "/two" to twoHandlerChain,
         )
     }
 

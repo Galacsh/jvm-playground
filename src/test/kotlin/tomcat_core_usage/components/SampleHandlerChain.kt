@@ -3,18 +3,24 @@ package tomcat_core_usage.components
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 
-abstract class SampleHandlerChain {
-    private var nextHandler: SampleHandlerChain? = null
-
-    protected abstract fun process(req: HttpServletRequest?, resp: HttpServletResponse?)
-
-    fun setNext(handler: SampleHandlerChain): SampleHandlerChain {
-        nextHandler = handler
-        return handler
-    }
+class SampleHandlerChain(private var handler: SampleHandler) {
+    private var interceptorList = mutableListOf<SampleHandlerInterceptor>()
 
     fun handle(req: HttpServletRequest?, resp: HttpServletResponse?) {
-        process(req, resp)
-        nextHandler?.handle(req, resp)
+        applyPreHandle(req, resp)
+        handler.handle(req, resp)
+        applyPostHandle(req, resp)
+    }
+
+    private fun applyPreHandle(req: HttpServletRequest?, resp: HttpServletResponse?) {
+        interceptorList.forEach { it.preHandle(req, resp) }
+    }
+
+    private fun applyPostHandle(req: HttpServletRequest?, resp: HttpServletResponse?) {
+        interceptorList.forEach { it.postHandle(req, resp) }
+    }
+
+    fun addInterceptor(interceptor: SampleHandlerInterceptor) {
+        interceptorList.add(interceptor)
     }
 }

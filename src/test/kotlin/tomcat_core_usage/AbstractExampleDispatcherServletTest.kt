@@ -22,7 +22,9 @@ import kotlin.test.assertEquals
  * - 서블릿 컨테이너 통해 클라이언트로부터의 HTTP 요청 수신
  * - WebApplicationContext를 찾아서 요청의 속성으로 바인딩
  * - Multipart 요청일 경우, MultipartHttpServletRequest로 래핑된 request 로 변환
- * - 적절한 핸들러를 찾아 핸들러 실행
+ * - 적절한 핸들러 실행 체인을 찾아 핸들러 실행
+ *     - 핸들러 실행 체인은 인터셉터를 포함할 수 있음
+ *     - 인터셉터는 핸들러 실행 전후에 추가 작업 수행
  * - 예외 처리
  * - ViewResolver 통해 뷰 렌더링
  * - HTTP 응답 반환
