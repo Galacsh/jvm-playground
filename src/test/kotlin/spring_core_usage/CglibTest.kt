@@ -39,14 +39,7 @@ class CglibTest {
         // Given
         val enhancer = Enhancer()
         enhancer.setInterfaces(arrayOf(CglibSample::class.java))
-        enhancer.setCallback(
-            MethodInterceptor { _: Any?, method: Method?, _: Array<out Any>?, _: MethodProxy? ->
-                when (method?.name) {
-                    "hello" -> "world"
-                    else -> throw UnsupportedOperationException("Method not supported: ${method?.name}")
-                }
-            }
-        )
+        enhancer.setCallback(worldOnHello())
 
         // When
         val instance = enhancer.create() as CglibSample
@@ -55,7 +48,35 @@ class CglibTest {
         assertEquals("world", instance.hello())
     }
 
+    @Test
+    fun `cglib 이용한 클래스 프록시 생성`() {
+        // Given
+        val enhancer = Enhancer()
+        enhancer.setSuperclass(ProxyTarget::class.java)
+        enhancer.setCallback(worldOnHello())
+
+        // When
+        val proxyInstance = enhancer.create() as ProxyTarget
+
+        // Then
+        assertEquals("world", proxyInstance.hello())
+    }
+
     interface CglibSample {
         fun hello(): String
     }
+
+    open class ProxyTarget {
+        open fun hello(): String {
+            return "This should not be returned"
+        }
+    }
+
+    private fun worldOnHello() =
+        MethodInterceptor { _: Any?, method: Method?, _: Array<out Any>?, _: MethodProxy? ->
+            when (method?.name) {
+                "hello" -> "world"
+                else -> throw UnsupportedOperationException("Method not supported: ${method?.name}")
+            }
+        }
 }
