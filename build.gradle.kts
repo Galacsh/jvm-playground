@@ -14,6 +14,8 @@ dependencies {
     implementation("org.springframework:spring-core:6.2.7")
     implementation("org.springframework:spring-context:6.2.7")
     implementation("org.springframework:spring-webmvc:6.2.7")
+    implementation("org.springframework:spring-aspects:6.2.7")
+    implementation("org.hibernate.validator:hibernate-validator:8.0.2.Final")
     implementation("org.aspectj:aspectjweaver:1.9.24")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:10.1.41")
     testImplementation(kotlin("test"))
