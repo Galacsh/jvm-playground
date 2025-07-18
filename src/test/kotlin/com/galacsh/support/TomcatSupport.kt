@@ -2,7 +2,6 @@ package com.galacsh.support
 
 import org.apache.catalina.Context
 import org.apache.catalina.startup.Tomcat
-import java.net.ServerSocket
 import java.util.logging.Level
 import java.util.logging.Logger
 import kotlin.io.path.createTempDirectory
@@ -11,7 +10,7 @@ object TomcatSupport {
     fun initialize(tomcat: Tomcat): Tomcat {
         Logger.getLogger("org.apache.catalina").level = Level.SEVERE
 
-        val port = randomPort()
+        val port = PortUtils.randomPort()
         val tempDir = createTempDirectory().toFile()
         val baseDir = tempDir.absolutePath
 
@@ -41,11 +40,5 @@ object TomcatSupport {
         if (!docBase.exists()) docBase.mkdirs()
 
         return tomcat.addContext(basePath, docBase.absolutePath)
-    }
-
-    private fun randomPort(): Int {
-        ServerSocket(0).use { socket ->
-            return socket.localPort
-        }
     }
 }
