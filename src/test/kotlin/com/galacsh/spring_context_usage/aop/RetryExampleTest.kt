@@ -4,6 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Pointcut
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
@@ -17,7 +18,8 @@ class RetryExampleTest {
     }
 
     @Test
-    fun `에러 2번까지는 재시도 후 성공한다`() {
+    @DisplayName("에러 2번까지는 재시도 후 성공한다")
+    fun retry_success_within_two_errors() {
         // Given
         val context = AnnotationConfigApplicationContext().apply {
             register(SampleBean::class.java)
@@ -37,7 +39,8 @@ class RetryExampleTest {
     }
 
     @Test
-    fun `3번 이상의 에러는 그대로 에러를 던진다`() {
+    @DisplayName("3번 이상의 에러는 그대로 에러를 던진다")
+    fun throw_error_after_three_attempts() {
         // Given
         val context = AnnotationConfigApplicationContext().apply {
             register(SampleBean::class.java)

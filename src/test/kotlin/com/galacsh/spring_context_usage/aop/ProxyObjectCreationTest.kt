@@ -3,6 +3,7 @@ package com.galacsh.spring_context_usage.aop
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import org.springframework.aop.MethodBeforeAdvice
 import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator
@@ -26,7 +27,8 @@ class ProxyObjectCreationTest {
      *
      */
     @Test
-    fun `Programmatic - AOP 프록시 객체를 생성할 수 있다`() {
+    @DisplayName("Programmatic - AOP 프록시 객체를 생성할 수 있다")
+    fun create_proxy_object_programmatically() {
         // Given
         val target = SampleBean()
         val advice = InvocationAspect()
@@ -43,7 +45,8 @@ class ProxyObjectCreationTest {
     }
 
     @Test
-    fun `Programmatic - Annotation 기반으로 프록시 객체를 생성할 수 있다`() {
+    @DisplayName("Programmatic - Annotation 기반으로 프록시 객체를 생성할 수 있다")
+    fun create_proxy_object_with_annotation_programmatically() {
         // Given
         val target = SampleBean()
         val aspect = AnnotationBasedInvocationAspect()
@@ -59,7 +62,8 @@ class ProxyObjectCreationTest {
     }
 
     @Test
-    fun `BeanPostProcessor + Annotation 기반으로 프록시 빈을 얻을 수 있다`() {
+    @DisplayName("BeanPostProcessor + Annotation 기반으로 프록시 빈을 얻을 수 있다")
+    fun get_proxy_bean_with_bean_post_processor_and_annotation() {
         // Given
         val context = AnnotationConfigApplicationContext().apply {
             register(SampleBean::class.java)

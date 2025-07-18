@@ -1,5 +1,6 @@
 package com.galacsh.spring_core_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.aot.hint.RuntimeHints
 import org.springframework.aot.hint.RuntimeHintsRegistrar
 import org.springframework.aot.hint.predicate.RuntimeHintsPredicates
@@ -37,7 +38,8 @@ import kotlin.test.assertTrue
  */
 class AotTest {
     @Test
-    fun `AoT 힌트`() {
+    @DisplayName("AoT 힌트")
+    fun aot_hints() {
         // Given
         val hints = RuntimeHints()
         val registrar = RuntimeHintsRegistrar { runtimeHints, _ ->

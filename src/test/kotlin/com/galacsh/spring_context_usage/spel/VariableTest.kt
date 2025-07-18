@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.spel
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.config.BeanExpressionContext
 import org.springframework.beans.factory.support.RootBeanDefinition
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
@@ -14,7 +15,8 @@ class VariableTest {
     private val parser = SpelExpressionParser()
 
     @Test
-    fun `#root 로 root context object 에 접근할 수 있다`() {
+    @DisplayName("#root 로 root context object 에 접근할 수 있다")
+    fun access_root_context_object() {
         val context = StandardEvaluationContext(Sample())
 
         val hello = parse("#root.message").getValue(context)
@@ -23,7 +25,8 @@ class VariableTest {
     }
 
     @Test
-    fun `#this 로 현재 context object 에 접근할 수 있다`() {
+    @DisplayName("#this 로 현재 context object 에 접근할 수 있다")
+    fun access_this_context_object() {
         val list = listOf(1, 2, 3, 4, 5, 6)
         val context = StandardEvaluationContext(list)
 
@@ -33,7 +36,8 @@ class VariableTest {
     }
 
     @Test
-    fun `변수를 Context에 등록할 수 있다`() {
+    @DisplayName("변수를 Context에 등록할 수 있다")
+    fun register_variable_in_context() {
         val context = StandardEvaluationContext()
         context.setVariable("varName", "varValue")
 
@@ -43,7 +47,8 @@ class VariableTest {
     }
 
     @Test
-    fun `@beanName 으로 빈을 참조할 수 있다`() {
+    @DisplayName("@beanName 으로 빈을 참조할 수 있다")
+    fun reference_bean_by_name() {
         // Given
         val appContext = initializedApplicationContext()
         val resolver = BeanFactoryResolver(appContext)
@@ -57,7 +62,8 @@ class VariableTest {
     }
 
     @Test
-    fun `#{표현식} + TemplateParserContext 로 리터럴 텍스트와 혼합할 수 있다`() {
+    @DisplayName("#{표현식} + TemplateParserContext 로 리터럴 텍스트와 혼합할 수 있다")
+    fun mix_literal_and_expression_with_template_parser_context() {
         // Given
         val evaluationContext = StandardEvaluationContext()
         val parserContext = TemplateParserContext()
@@ -72,7 +78,8 @@ class VariableTest {
     }
 
     @Test
-    fun `@Value 속 #{} 표현식은 BeanExpressionResolver 에 의해 처리된다`() {
+    @DisplayName("@Value 속 #{} 표현식은 BeanExpressionResolver 에 의해 처리된다")
+    fun bean_expression_resolver_handles_value_expression() {
         // Given
         val appContext = initializedApplicationContext()
         val resolver = appContext.beanFactory.beanExpressionResolver

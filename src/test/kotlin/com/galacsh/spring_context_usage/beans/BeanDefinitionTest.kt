@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.beans
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.beans.factory.support.BeanDefinitionBuilder
 import org.springframework.beans.factory.support.DefaultListableBeanFactory
@@ -34,7 +35,8 @@ class BeanDefinitionTest {
     }
 
     @Test
-    fun `빈 등록 및 조회 - RootBeanDefinition`() {
+    @DisplayName("빈 등록 및 조회 - RootBeanDefinition")
+    fun register_and_get_bean_with_root_bean_definition() {
         // Given
         val beanDefinition: BeanDefinition = RootBeanDefinition(SampleParentBean::class.java)
         beanFactory.registerBeanDefinition("rootBean", beanDefinition)
@@ -47,7 +49,8 @@ class BeanDefinitionTest {
     }
 
     @Test
-    fun `빈 등록 및 조회 - GenericBeanDefinition`() {
+    @DisplayName("빈 등록 및 조회 - GenericBeanDefinition")
+    fun register_and_get_bean_with_generic_bean_definition() {
         // Given
         val parentDefinition = GenericBeanDefinition()
         parentDefinition.beanClass = SampleParentBean::class.java
@@ -68,7 +71,8 @@ class BeanDefinitionTest {
     }
 
     @Test
-    fun `BeanDefinitionBuilder 를 사용하여 손쉽게 빈 정의를 작성할 수 있다`() {
+    @DisplayName("BeanDefinitionBuilder 를 사용하여 손쉽게 빈 정의를 작성할 수 있다")
+    fun easy_bean_definition_with_bean_definition_builder() {
         // Given
         val beanDefinition = BeanDefinitionBuilder
             .genericBeanDefinition(SampleParentBean::class.java)
@@ -84,7 +88,8 @@ class BeanDefinitionTest {
     }
 
     @Test
-    fun `정적 팩터리 메서드로 빈을 생성할 수 있다`() {
+    @DisplayName("정적 팩터리 메서드로 빈을 생성할 수 있다")
+    fun create_bean_with_static_factory_method() {
         // Given
         val sampleBeanFactory = RootBeanDefinition(SampleBeanFactory::class.java)
         sampleBeanFactory.factoryMethodName = "staticCreate"
@@ -99,7 +104,8 @@ class BeanDefinitionTest {
     }
 
     @Test
-    fun `인스턴스 팩터리 메서드로 빈을 생성할 수 있다`() {
+    @DisplayName("인스턴스 팩터리 메서드로 빈을 생성할 수 있다")
+    fun create_bean_with_instance_factory_method() {
         // Given
         val sampleBeanFactory = RootBeanDefinition(SampleBeanFactory::class.java)
         beanFactory.registerBeanDefinition("sampleBeanFactory", sampleBeanFactory)

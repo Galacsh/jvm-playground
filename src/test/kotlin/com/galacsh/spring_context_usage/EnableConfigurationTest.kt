@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.context.annotation.*
 import org.springframework.core.type.AnnotationMetadata
 import kotlin.test.Test
@@ -7,14 +8,16 @@ import kotlin.test.assertEquals
 
 class EnableConfigurationTest {
     @Test
-    fun `특정 빈 설정을 로드하는 어노테이션을 만들 수 있다`() {
+    @DisplayName("특정 빈 설정을 로드하는 어노테이션을 만들 수 있다")
+    fun load_bean_config_with_custom_annotation() {
         val ac = AnnotationConfigApplicationContext(SimpleConfig::class.java)
         val hello = ac.getBean(Greet::class.java)
         assertEquals("Hello, World!", hello.greet())
     }
 
     @Test
-    fun `ImportSelector 통해 빈 설정을 선택할 수 있다`() {
+    @DisplayName("ImportSelector 통해 빈 설정을 선택할 수 있다")
+    fun select_bean_config_with_import_selector() {
         val ac = AnnotationConfigApplicationContext(UsingSelectorConfig::class.java)
         val hello = ac.getBean(Greet::class.java)
         assertEquals("Hello, John!", hello.greet())
@@ -64,4 +67,3 @@ class EnableConfigurationTest {
 
     class User(var name: String)
 }
-

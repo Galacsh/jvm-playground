@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
@@ -18,7 +19,8 @@ import kotlin.test.assertEquals
  */
 class AwareTest {
     @Test
-    fun `Aware 인터페이스를 사용하여 원하는 Spring 객체에 접근할 수 있다`() {
+    @DisplayName("Aware 인터페이스를 사용하여 원하는 Spring 객체에 접근할 수 있다")
+    fun access_spring_object_with_aware_interface() {
         // Given
         AnnotationConfigApplicationContext(
             ApplicationContextPortal::class.java,

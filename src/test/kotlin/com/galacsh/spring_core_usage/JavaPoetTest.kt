@@ -1,5 +1,6 @@
 package com.galacsh.spring_core_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.javapoet.JavaFile
 import org.springframework.javapoet.MethodSpec
 import org.springframework.javapoet.TypeSpec
@@ -19,7 +20,8 @@ class JavaPoetTest {
     private val className = "PoetSample"
 
     @Test
-    fun `JavaPoet을 통해 java 소스 파일을 생성할 수 있음`() {
+    @DisplayName("JavaPoet을 통해 java 소스 파일을 생성할 수 있음")
+    fun generate_java_source_with_javapoet() {
         // public static void main(String[] args)
         val mainMethod = MethodSpec.methodBuilder("main")
             .addModifiers(Modifier.PUBLIC, Modifier.STATIC)

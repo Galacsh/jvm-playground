@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean
 import org.springframework.context.MessageSource
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
@@ -13,7 +14,8 @@ import kotlin.test.assertEquals
 
 class MessageSourceTest {
     @Test
-    fun `메시지 소스를 사용하여 국제화된 메시지를 가져올 수 있다`() {
+    @DisplayName("메시지 소스를 사용하여 국제화된 메시지를 가져올 수 있다")
+    fun get_internationalized_message_with_message_source() {
         // Given
         val username = "John"
         val context = AnnotationConfigApplicationContext(YamlMessageSourceConfig::class.java)

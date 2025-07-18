@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.beans
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor
 import org.springframework.beans.factory.config.BeanDefinition
@@ -22,7 +23,8 @@ class BeanDependencyInjectionTest {
     }
 
     @Test
-    fun `생성자 주입을 통해 의존성을 주입할 수 있다`() {
+    @DisplayName("생성자 주입을 통해 의존성을 주입할 수 있다")
+    fun inject_dependency_via_constructor() {
         // Given
         val serviceDefinition: BeanDefinition = RootBeanDefinition(SampleService::class.java)
         beanFactory.registerBeanDefinition("sampleService", serviceDefinition)
@@ -42,7 +44,8 @@ class BeanDependencyInjectionTest {
     }
 
     @Test
-    fun `세터 주입을 통해 의존성을 주입할 수 있다`() {
+    @DisplayName("세터 주입을 통해 의존성을 주입할 수 있다")
+    fun inject_dependency_via_setter() {
         // Given
         val serviceDefinition: BeanDefinition = RootBeanDefinition(SampleService::class.java)
         beanFactory.registerBeanDefinition("sampleService", serviceDefinition)
@@ -63,7 +66,8 @@ class BeanDependencyInjectionTest {
     }
 
     @Test
-    fun `필드 주입을 통해 의존성을 주입할 수 있다`() {
+    @DisplayName("필드 주입을 통해 의존성을 주입할 수 있다")
+    fun inject_dependency_via_field() {
         // Given
         val serviceDefinition: BeanDefinition = RootBeanDefinition(SampleService::class.java)
         beanFactory.registerBeanDefinition("sampleService", serviceDefinition)

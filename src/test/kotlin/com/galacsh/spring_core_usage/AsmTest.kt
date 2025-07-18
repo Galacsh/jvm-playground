@@ -1,5 +1,6 @@
 package com.galacsh.spring_core_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.asm.ClassWriter
 import org.springframework.asm.Opcodes
 import org.springframework.asm.Type
@@ -22,7 +23,8 @@ class AsmTest {
     private val methodDescriptor = "()Ljava/lang/String;"
 
     @Test
-    fun `ASM 으로 클래스를 생성하고 메서드를 호출할 수 있음`() {
+    @DisplayName("ASM 으로 클래스를 생성하고 메서드를 호출할 수 있음")
+    fun create_class_and_call_method_with_asm() {
         // Given
         val asmSampleClass = writeAsmSampleClass()
         val instance = asmSampleClass.getDeclaredConstructor().newInstance()
@@ -69,7 +71,8 @@ class AsmTest {
         mv.visitCode()
         // Load Constant: 피연산자 스택에 "world" 문자열을 로드
         mv.visitLdcInsn(methodResult)
-        // 피연산자 스택의 최상위에 올라와 있는 객체 참조를 반환 (Return Reference - A → Address → Reference)
+        // 피연산자 스택의 최상위에 올라와 있는 객체 참조를 반환
+        // (Return Reference - A → Address → Reference)
         mv.visitInsn(Opcodes.ARETURN)
         mv.visitMaxs(1, 1)
         mv.visitEnd()

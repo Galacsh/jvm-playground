@@ -1,5 +1,6 @@
 package com.galacsh.etc
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import java.text.DecimalFormat
 import kotlin.test.Test
@@ -7,7 +8,8 @@ import kotlin.test.assertEquals
 
 class DecimalFormatTest {
     @Test
-    fun `음수와 양수 각각 패턴을 지정할 수 있다`() {
+    @DisplayName("음수와 양수 각각 패턴을 지정할 수 있다")
+    fun pattern_for_positive_and_negative() {
         val f = DecimalFormat("[+]#;[-]#")
 
         assertAll(
@@ -17,14 +19,16 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `Prefix, Suffix를 바꿀 수 있다`() {
+    @DisplayName("Prefix, Suffix를 바꿀 수 있다")
+    fun change_prefix_and_suffix() {
         val f = DecimalFormat("[Prefix] # [Suffix]")
 
         assertEquals("[Prefix] 123456 [Suffix]", f.format(123_456))
     }
 
     @Test
-    fun `항상 숫자를 표시하되 없으면 0으로 채운다`() {
+    @DisplayName("항상 숫자를 표시하되 없으면 0으로 채운다")
+    fun always_show_number_and_fill_with_zero() {
         val f = DecimalFormat("0000")
 
         assertAll(
@@ -37,7 +41,8 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `숫자를 표시하되 없으면 표시하지 않는다`() {
+    @DisplayName("숫자를 표시하되 없으면 표시하지 않는다")
+    fun show_number_without_filling() {
         val f = DecimalFormat("##")
 
         assertAll(
@@ -50,7 +55,8 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `그룹화는 패턴의 마지막 콤마를 기준으로 정해진다`() {
+    @DisplayName("그룹화는 패턴의 마지막 콤마를 기준으로 정해진다")
+    fun grouping_by_last_comma_in_pattern() {
         val one = DecimalFormat("#,0")
         val two = DecimalFormat("#,#0")
         val three = DecimalFormat("#,##0")
@@ -89,7 +95,8 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `소수부 패턴도 지정할 수 있다`() {
+    @DisplayName("소수부 패턴도 지정할 수 있다")
+    fun decimal_pattern_specification() {
         val f = DecimalFormat("0.##")
 
         assertAll(
@@ -100,7 +107,8 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `소수부도 0으로 채울 수 있다`() {
+    @DisplayName("소수부도 0으로 채울 수 있다")
+    fun fill_decimal_with_zero() {
         val f = DecimalFormat("0.000")
 
         assertAll(
@@ -112,7 +120,8 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `소수부의 경우 자리수를 넘어가면 반올림이 발생한다`() {
+    @DisplayName("소수부의 경우 자리수를 넘어가면 반올림이 발생한다")
+    fun rounding_when_decimal_exceeds_digits() {
         val f = DecimalFormat("0.##")
 
         assertAll(
@@ -126,7 +135,8 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `지수 표기법을 사용할 수 있다`() {
+    @DisplayName("지수 표기법을 사용할 수 있다")
+    fun use_exponential_notation() {
         val f = DecimalFormat("0.##E0")
 
         assertAll(
@@ -137,7 +147,8 @@ class DecimalFormatTest {
     }
 
     @Test
-    fun `지수 표기법 사용 시에도 반올림이 발생한다`() {
+    @DisplayName("지수 표기법 사용 시에도 반올림이 발생한다")
+    fun rounding_with_exponential_notation() {
         val f = DecimalFormat("0.##E0")
 
         assertAll(

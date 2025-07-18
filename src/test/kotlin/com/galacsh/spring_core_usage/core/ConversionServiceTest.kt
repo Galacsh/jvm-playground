@@ -1,5 +1,6 @@
 package com.galacsh.spring_core_usage.core
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.core.convert.ConversionService
 import org.springframework.core.convert.support.ConfigurableConversionService
 import org.springframework.core.env.StandardEnvironment
@@ -13,7 +14,8 @@ import kotlin.test.assertTrue
  */
 class ConversionServiceTest {
     @Test
-    fun `기본 converters`() {
+    @DisplayName("기본 converters")
+    fun default_converters() {
         // 💡 기본 ConversionService: StandardEnvironment 통해 사용 가능
         val conversionService: ConversionService = StandardEnvironment().conversionService
 
@@ -23,7 +25,8 @@ class ConversionServiceTest {
     }
 
     @Test
-    fun `converter 직접 등록하는 것도 가능`() {
+    @DisplayName("converter 직접 등록하는 것도 가능")
+    fun register_custom_converter() {
         val conversionService: ConversionService = StandardEnvironment().conversionService
 
         // 직접 등록한 타입 변환기 시연을 위한 샘플 클래스

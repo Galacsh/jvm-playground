@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.beans
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.support.BeanDefinitionReader
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
@@ -27,7 +28,8 @@ class BeanDefinitionReaderTest {
     }
 
     @Test
-    fun `XML 파일로부터 2개의 빈 정의를 읽는다`() {
+    @DisplayName("XML 파일로부터 2개의 빈 정의를 읽는다")
+    fun read_two_bean_definitions_from_xml() {
         // Given
         val resource = ClassPathResource("spring_context_usage/beans/beans.xml")
 
@@ -39,7 +41,8 @@ class BeanDefinitionReaderTest {
     }
 
     @Test
-    fun `읽은 빈 정의들을 토대로 빈을 생성할 수 있다`() {
+    @DisplayName("읽은 빈 정의들을 토대로 빈을 생성할 수 있다")
+    fun create_beans_from_read_definitions() {
         // Given
         val resource = ClassPathResource("spring_context_usage/beans/beans.xml")
         definitionReader.loadBeanDefinitions(resource)

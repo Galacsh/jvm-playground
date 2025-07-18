@@ -1,6 +1,7 @@
 package com.galacsh.spring_context_usage.aop
 
 import org.aspectj.lang.annotation.*
+import org.junit.jupiter.api.DisplayName
 import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import kotlin.test.BeforeTest
@@ -10,7 +11,8 @@ import kotlin.test.assertEquals
 class AdvicesTest {
 
     @Test
-    fun `정상 실행되는 경우 afterThrowing 빼고 모두 호출됨`() {
+    @DisplayName("정상 실행되는 경우 afterThrowing 빼고 모두 호출됨")
+    fun normal_execution_calls_all_advices_except_after_throwing() {
         // Given
         val context = AnnotationConfigApplicationContext().apply {
             register(SampleBean::class.java)
@@ -34,7 +36,8 @@ class AdvicesTest {
     }
 
     @Test
-    fun `예외가 발생하는 경우 afterThrowing 호출됨`() {
+    @DisplayName("예외가 발생하는 경우 afterThrowing 호출됨")
+    fun exception_triggers_after_throwing_advice() {
         // Given
         val context = AnnotationConfigApplicationContext().apply {
             register(SampleBean::class.java)

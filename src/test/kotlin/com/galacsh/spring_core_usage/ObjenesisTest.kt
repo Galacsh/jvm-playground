@@ -1,5 +1,6 @@
 package com.galacsh.spring_core_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.objenesis.ObjenesisStd
 import org.springframework.objenesis.strategy.StdInstantiatorStrategy
 import kotlin.test.Test
@@ -26,7 +27,8 @@ import kotlin.test.assertNull
  */
 class ObjenesisTest {
     @Test
-    fun `objenesis can instantiate uninstantiable classes`() {
+    @DisplayName("objenesis 는 생성자를 호출하지 않고 객체를 생성할 수 있음")
+    fun instantiate_uninstantiable_classes_with_objenesis() {
         // private 생성자에다 init 블록에서 예외를 던지는 클래스도 생성 가능
         class Sample private constructor(val name: String) {
             init {

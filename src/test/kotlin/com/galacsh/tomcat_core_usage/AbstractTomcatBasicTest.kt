@@ -2,6 +2,7 @@ package com.galacsh.tomcat_core_usage
 
 import com.galacsh.tomcat_core_usage.components.SampleSimpleServlet
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.DisplayName
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpClient.Redirect
@@ -61,7 +62,8 @@ import kotlin.test.assertEquals
  */
 abstract class AbstractTomcatBasicTest {
     @Test
-    fun `Tomcat 서버를 실행하고 등록한 서블릿이 정상적으로 응답한다`() {
+    @DisplayName("Tomcat 서버를 실행하고 등록한 서블릿이 정상적으로 응답한다")
+    fun run_tomcat_and_receive_response_from_registered_servlet() {
         // Given
         val port = SharedTomcat.port
         val request = HttpRequest.newBuilder()

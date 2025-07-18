@@ -1,6 +1,7 @@
 package com.galacsh.spring_core_usage.core
 
 import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.DisplayName
 import org.springframework.core.task.AsyncTaskExecutor
 import org.springframework.core.task.SimpleAsyncTaskExecutor
 import java.util.concurrent.Callable
@@ -30,7 +31,8 @@ import kotlin.test.assertTrue
 @Disabled // 1초 소요되므로 테스트 비활성화
 class TaskTest {
     @Test
-    fun `TaskExecutor 를 사용하여 비동기 작업을 실행할 수 있다`() {
+    @DisplayName("TaskExecutor 를 사용하여 비동기 작업을 실행할 수 있다")
+    fun execute_async_task_with_task_executor() {
         // Given
         val iterate = 5
         val taskDuration = 1000L

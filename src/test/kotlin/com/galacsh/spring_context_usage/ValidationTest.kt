@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 import jakarta.validation.Validator
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator
+import org.junit.jupiter.api.DisplayName
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean
@@ -16,7 +17,8 @@ import kotlin.test.assertEquals
 
 class ValidationTest {
     @Test
-    fun `팩터리 빈을 통해 생성된 커스텀 검증기로 검증할 수 있다`() {
+    @DisplayName("팩터리 빈을 통해 생성된 커스텀 검증기로 검증할 수 있다")
+    fun validate_with_custom_validator() {
         // Given
         val ac = AnnotationConfigApplicationContext(ValidationConfig::class.java)
         val validator = ac.getBean(Validator::class.java)

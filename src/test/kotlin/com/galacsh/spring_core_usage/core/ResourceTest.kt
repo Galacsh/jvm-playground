@@ -1,5 +1,6 @@
 package com.galacsh.spring_core_usage.core
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.core.io.ClassPathResource
 import org.springframework.core.io.DefaultResourceLoader
 import org.springframework.core.io.Resource
@@ -19,13 +20,15 @@ class ResourceTest {
     private val location = "spring_core_usage/variables.json"
 
     @Test
-    fun `리소스 객체 직접 초기화`() {
+    @DisplayName("리소스 객체 직접 초기화")
+    fun direct_resource_initialization() {
         val classPathResource: Resource = ClassPathResource(location)
         assertTrue { classPathResource.exists() }
     }
 
     @Test
-    fun `리소스 로더를 이용해 불러오기`() {
+    @DisplayName("리소스 로더를 이용해 불러오기")
+    fun load_resource_with_resource_loader() {
         val usingLoader = UsingResourceLoader(
             // 다른 리소스 로더를 주입할 수 있습니다.
             DefaultResourceLoader(javaClass.classLoader)

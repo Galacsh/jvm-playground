@@ -2,6 +2,7 @@ package com.galacsh.webmvc
 
 import com.galacsh.support.TomcatSupport
 import org.apache.catalina.startup.Tomcat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import org.springframework.web.SpringServletContainerInitializer
 import org.springframework.web.context.WebApplicationContext
@@ -16,7 +17,8 @@ class SpringServletContainerInitializerTest {
     private lateinit var tomcat: Tomcat
 
     @Test
-    fun `SpringServletContainerInitializer 를 통해 초기화할 수 있다`() {
+    @DisplayName("SpringServletContainerInitializer 를 통해 초기화할 수 있다")
+    fun initialize_with_spring_servlet_container_initializer() {
         // Given
         val context = TomcatSupport.addContext(tomcat, "/spring-web")
         context.addServletContainerInitializer(

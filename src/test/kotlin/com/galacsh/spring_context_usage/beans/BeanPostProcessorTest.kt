@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.beans
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.config.BeanPostProcessor
 import org.springframework.beans.factory.support.DefaultListableBeanFactory
 import org.springframework.beans.factory.support.RootBeanDefinition
@@ -26,7 +27,8 @@ class BeanPostProcessorTest {
     }
 
     @Test
-    fun `후처리기가 없는 경우 빈은 그대로 생성된다`() {
+    @DisplayName("후처리기가 없는 경우 빈은 그대로 생성된다")
+    fun bean_created_without_post_processor() {
         // Given
         val definition = RootBeanDefinition(SampleBean::class.java)
         beanFactory.registerBeanDefinition("sampleBean", definition)
@@ -39,7 +41,8 @@ class BeanPostProcessorTest {
     }
 
     @Test
-    fun `후처리기가 있는 경우 특정 시점에 개입해 커스터마이즈하거나 다른 로직을 적용할 수 있다`() {
+    @DisplayName("후처리기가 있는 경우 특정 시점에 개입해 커스터마이즈하거나 다른 로직을 적용할 수 있다")
+    fun bean_customized_with_post_processor() {
         // Given
         val definition = RootBeanDefinition(SampleBean::class.java)
         beanFactory.registerBeanDefinition("sampleBean", definition)

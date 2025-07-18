@@ -3,6 +3,7 @@ package com.galacsh.tomcat_core_usage
 import com.galacsh.tomcat_core_usage.components.SampleFilter
 import com.galacsh.tomcat_core_usage.components.SampleSimpleServlet
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.DisplayName
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpClient.Redirect
@@ -26,7 +27,8 @@ import kotlin.test.assertEquals
  */
 abstract class AbstractFilterTest {
     @Test
-    fun `등록한 필터에 의해 변경된 요청을 받는다`() {
+    @DisplayName("등록한 필터에 의해 변경된 요청을 받는다")
+    fun receive_request_modified_by_registered_filter() {
         // Given
         val port = SharedTomcat.port
         val request = HttpRequest.newBuilder()

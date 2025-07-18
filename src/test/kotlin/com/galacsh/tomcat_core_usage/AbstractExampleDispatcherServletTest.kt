@@ -2,6 +2,7 @@ package com.galacsh.tomcat_core_usage
 
 import com.galacsh.tomcat_core_usage.components.SampleDispatcherServlet
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.DisplayName
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpClient.Redirect
@@ -31,7 +32,8 @@ import kotlin.test.assertEquals
  */
 abstract class AbstractExampleDispatcherServletTest {
     @Test
-    fun `one 경로에 맞는 핸들러로 요청을 전달하여 응답을 생성한다`() {
+    @DisplayName("one 경로에 맞는 핸들러로 요청을 전달하여 응답을 생성한다")
+    fun request_returns_first_handler_response() {
         // Given
         val port = SharedTomcat.port
         val request = HttpRequest.newBuilder()
@@ -49,7 +51,8 @@ abstract class AbstractExampleDispatcherServletTest {
     }
 
     @Test
-    fun `two 경로에 맞는 핸들러로 요청을 전달하여 응답을 생성한다`() {
+    @DisplayName("two 경로에 맞는 핸들러로 요청을 전달하여 응답을 생성한다")
+    fun request_returns_first_and_second_handler_response() {
         // Given
         val port = SharedTomcat.port
         val request = HttpRequest.newBuilder()

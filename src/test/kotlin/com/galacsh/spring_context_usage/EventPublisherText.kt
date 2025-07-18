@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.event.EventListener
 import kotlin.test.Test
@@ -8,7 +9,8 @@ import kotlin.test.assertTrue
 
 class EventPublisherText {
     @Test
-    fun `이벤트 퍼블리셔를 사용하여 이벤트를 발행, 수신할 수 있다`() {
+    @DisplayName("이벤트 퍼블리셔를 통해 이벤트를 발행할 수 있다")
+    fun publish_event_with_event_publisher() {
         // Given
         val context = AnnotationConfigApplicationContext(EventHandler::class.java)
         val handler = context.getBean(EventHandler::class.java)

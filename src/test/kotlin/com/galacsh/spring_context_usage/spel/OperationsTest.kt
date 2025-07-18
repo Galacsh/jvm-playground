@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.spel
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import org.springframework.expression.EvaluationContext
 import org.springframework.expression.spel.standard.SpelExpressionParser
@@ -12,7 +13,8 @@ class OperationsTest {
     private val parser = SpelExpressionParser()
 
     @Test
-    fun `리터럴 표현식`() {
+    @DisplayName("리터럴 표현식")
+    fun literal_expression() {
         assertAll(
             { assertEquals("Hello World", parse("'Hello World'")) },
             { assertEquals(123, parse("123")) },
@@ -23,7 +25,8 @@ class OperationsTest {
     }
 
     @Test
-    fun `논리 연산자를 사용할 수 있다`() {
+    @DisplayName("논리 연산자를 사용할 수 있다")
+    fun logical_operators() {
         // Given
         val sample = mapOf("count" to 10)
         val context = StandardEvaluationContext(sample)
@@ -39,7 +42,8 @@ class OperationsTest {
     }
 
     @Test
-    fun `수학 연산자를 사용할 수 있다`() {
+    @DisplayName("수학 연산자를 사용할 수 있다")
+    fun math_operators() {
         // Given
         val sample = mapOf("x" to 10, "y" to 5)
         val context = StandardEvaluationContext(sample)
@@ -56,7 +60,8 @@ class OperationsTest {
     }
 
     @Test
-    fun `삼항 연산자를 사용할 수 있다`() {
+    @DisplayName("삼항 연산자를 사용할 수 있다")
+    fun ternary_operator() {
         // Given
         val sample = mapOf("isActive" to true)
         val context = StandardEvaluationContext(sample)
@@ -72,7 +77,8 @@ class OperationsTest {
     }
 
     @Test
-    fun `Elvis 연산자를 사용할 수 있다`() {
+    @DisplayName("Elvis 연산자를 사용할 수 있다")
+    fun elvis_operator() {
         // Given
         val sample = mapOf("name" to "John")
         val context = StandardEvaluationContext(sample)
@@ -85,7 +91,8 @@ class OperationsTest {
     }
 
     @Test
-    fun `안전한 탐색을 할 수 있다`() {
+    @DisplayName("안전한 탐색을 할 수 있다")
+    fun safe_navigation() {
         // Given
         val sample = mapOf("name" to "john")
         val context = StandardEvaluationContext(sample)

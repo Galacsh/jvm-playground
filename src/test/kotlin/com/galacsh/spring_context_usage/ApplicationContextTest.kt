@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -24,7 +25,8 @@ import kotlin.test.assertEquals
  */
 class ApplicationContextTest {
     @Test
-    fun `일반 클래스도 빈으로 등록할 수 있다`() {
+    @DisplayName("일반 클래스도 빈으로 등록할 수 있다")
+    fun register_plain_class_as_bean() {
         // Given
         val context = AnnotationConfigApplicationContext(SampleImpl::class.java)
 
@@ -36,7 +38,8 @@ class ApplicationContextTest {
     }
 
     @Test
-    fun `@Configuration 으로 빈을 등록할 수 있다`() {
+    @DisplayName("@Configuration 으로 빈을 등록할 수 있다")
+    fun register_bean_with_configuration() {
         // Given
         val context = AnnotationConfigApplicationContext(SampleConfig::class.java)
 
@@ -48,7 +51,8 @@ class ApplicationContextTest {
     }
 
     @Test
-    fun `@Component 로 빈을 등록할 수 있다`() {
+    @DisplayName("@Component 로 빈을 등록할 수 있다")
+    fun register_bean_with_component() {
         // Given
         val context = AnnotationConfigApplicationContext("com.galacsh.spring_context_usage")
 

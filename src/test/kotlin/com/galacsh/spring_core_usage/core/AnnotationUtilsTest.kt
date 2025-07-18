@@ -1,5 +1,6 @@
 package com.galacsh.spring_core_usage.core
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import org.springframework.core.annotation.AnnotatedElementUtils
 import org.springframework.core.annotation.AnnotationUtils
@@ -14,7 +15,8 @@ import kotlin.test.*
  */
 class AnnotationUtilsTest {
     @Test
-    fun `클래스 어노테이션을 찾아서 값을 확인할 수 있다`() {
+    @DisplayName("클래스 어노테이션을 찾아서 값을 확인할 수 있다")
+    fun find_class_annotation_and_check_value() {
         val classSimpleAnnotation = AnnotationUtils.findAnnotation(
             AnnotatedBaseClass::class.java,
             SimpleAnnotation::class.java
@@ -27,7 +29,8 @@ class AnnotationUtilsTest {
     }
 
     @Test
-    fun `메서드 어노테이션을 찾아서 값을 확인할 수 있다`() {
+    @DisplayName("메서드 어노테이션을 찾아서 값을 확인할 수 있다")
+    fun find_method_annotation_and_check_value() {
         val methodSimpleAnnotation = AnnotationUtils.findAnnotation(
             AnnotatedBaseClass::class.java.getMethod("annotatedMethod"),
             SimpleAnnotation::class.java
@@ -40,7 +43,8 @@ class AnnotationUtilsTest {
     }
 
     @Test
-    fun `필드 어노테이션을 찾아서 값을 확인할 수 있다`() {
+    @DisplayName("필드 어노테이션을 찾아서 값을 확인할 수 있다")
+    fun find_field_annotation_and_check_value() {
         val fieldSimpleAnnotation = AnnotationUtils.findAnnotation(
             AnnotatedBaseClass::class.java.getField("annotatedField"),
             SimpleAnnotation::class.java
@@ -53,7 +57,8 @@ class AnnotationUtilsTest {
     }
 
     @Test
-    fun `직접 정의된 어노테이션임을 알 수 있다`() {
+    @DisplayName("직접 정의된 어노테이션임을 알 수 있다")
+    fun check_annotation_declared_locally() {
         val declaredLocally = AnnotationUtils.isAnnotationDeclaredLocally(
             SimpleAnnotation::class.java,
             AnnotatedBaseClass::class.java,
@@ -68,7 +73,8 @@ class AnnotationUtilsTest {
     }
 
     @Test
-    fun `FQCN 으로 어노테이션 여부를 알 수 있다`() {
+    @DisplayName("FQCN 으로 어노테이션 여부를 알 수 있다")
+    fun check_annotation_by_FQCN() {
         val hasSimpleAnnotation = AnnotatedElementUtils.isAnnotated(
             AnnotatedBaseClass::class.java,
             "com.galacsh.spring_core_usage.core.AnnotationUtilsTest\$ComposedAnnotation"
@@ -78,7 +84,8 @@ class AnnotationUtilsTest {
     }
 
     @Test
-    fun `Composed 속 Marker 어노테이션을 찾을 수 있다`() {
+    @DisplayName("Composed 속 Marker 어노테이션을 찾을 수 있다")
+    fun find_marker_annotation_in_composed() {
         val markerAnnotation = AnnotatedElementUtils.findMergedAnnotation(
             AnnotatedBaseClass::class.java,
             MarkerAnnotation::class.java
@@ -89,7 +96,8 @@ class AnnotationUtilsTest {
     }
 
     @Test
-    fun `상속된 클래스에서도 Composed 속 Marker 어노테이션을 찾을 수 있다`() {
+    @DisplayName("상속된 클래스에서도 Composed 속 Marker 어노테이션을 찾을 수 있다")
+    fun find_marker_annotation_in_inherited_class() {
         val markerAnnotation = AnnotatedElementUtils.findMergedAnnotation(
             AnnotatedSubClass::class.java,
             MarkerAnnotation::class.java
@@ -100,7 +108,8 @@ class AnnotationUtilsTest {
     }
 
     @Test
-    fun `한 번에 묶어서 원하는 어노테이션의 값을 찾을 수 있다`() {
+    @DisplayName("한 번에 묶어서 원하는 어노테이션의 값을 찾을 수 있다")
+    fun find_annotation_value_with_merged_annotations() {
         val merged = MergedAnnotations.from(AnnotatedBaseClass::class.java)
 
         val markerName = merged.get(MarkerAnnotation::class.java)

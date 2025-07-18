@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.spel
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import org.springframework.expression.EvaluationContext
 import org.springframework.expression.spel.standard.SpelExpressionParser
@@ -11,7 +12,8 @@ class CollectionTest {
     private val parser = SpelExpressionParser()
 
     @Test
-    fun `컬렉션에서 특정 필드를 뽑아낼 수 있다 - Projection`() {
+    @DisplayName("컬렉션에서 특정 필드를 뽑아낼 수 있다 - Projection")
+    fun collection_projection() {
         // Given
         val users = listOf(
             Sample("Alice", 10),
@@ -32,7 +34,8 @@ class CollectionTest {
     }
 
     @Test
-    fun `컬렉션에서 조건에 맞는 요소를 필터링할 수 있다 - Selection`() {
+    @DisplayName("컬렉션에서 조건에 맞는 요소를 필터링할 수 있다 - Selection")
+    fun collection_selection() {
         // Given
         val users = listOf(
             Sample("Alice", 10),

@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.beans
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.beans.factory.support.DefaultListableBeanFactory
 import org.springframework.beans.factory.support.RootBeanDefinition
@@ -26,7 +27,8 @@ class BeanScopeTest {
     }
 
     @Test
-    fun `싱글톤 빈은 매번 동일한 인스턴스가 조회된다`() {
+    @DisplayName("싱글톤 빈은 매번 동일한 인스턴스가 조회된다")
+    fun singleton_bean_returns_same_instance() {
         // Given
         val beanDefinition: BeanDefinition = RootBeanDefinition(SampleBean::class.java)
         beanDefinition.scope = BeanDefinition.SCOPE_SINGLETON
@@ -41,7 +43,8 @@ class BeanScopeTest {
     }
 
     @Test
-    fun `프로토타입 빈은 매번 다른 인스턴스가 조회된다`() {
+    @DisplayName("프로토타입 빈은 매번 다른 인스턴스가 조회된다")
+    fun prototype_bean_returns_different_instances() {
         // Given
         val beanDefinition: BeanDefinition = RootBeanDefinition(SampleBean::class.java)
         beanDefinition.scope = BeanDefinition.SCOPE_PROTOTYPE

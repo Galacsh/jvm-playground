@@ -1,5 +1,6 @@
 package com.galacsh.spring_context_usage.spel
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
 import org.springframework.expression.EvaluationContext
 import org.springframework.expression.spel.standard.SpelExpressionParser
@@ -12,7 +13,8 @@ class AccessTest {
     private val parser = SpelExpressionParser()
 
     @Test
-    fun `프로퍼티에 접근할 수 있다`() {
+    @DisplayName("프로퍼티에 접근할 수 있다")
+    fun access_property() {
         // Given
         val sample = Sample("John")
         val context = StandardEvaluationContext(sample)
@@ -25,7 +27,8 @@ class AccessTest {
     }
 
     @Test
-    fun `메서드를 호출할 수 있다`() {
+    @DisplayName("메서드를 호출할 수 있다")
+    fun call_method() {
         // Given
         val sample = Sample("John")
         val context = StandardEvaluationContext(sample)
@@ -38,7 +41,8 @@ class AccessTest {
     }
 
     @Test
-    fun `배열에 접근할 수 있다`() {
+    @DisplayName("배열에 접근할 수 있다")
+    fun access_array() {
         // Given
         val array = arrayOf("apple", "banana", "cherry")
         val context = StandardEvaluationContext(array)
@@ -55,7 +59,8 @@ class AccessTest {
     }
 
     @Test
-    fun `리스트에 접근할 수 있다`() {
+    @DisplayName("리스트에 접근할 수 있다")
+    fun access_list() {
         // Given
         val list = listOf("apple", "banana", "cherry")
         val context = StandardEvaluationContext(list)
@@ -72,7 +77,8 @@ class AccessTest {
     }
 
     @Test
-    fun `맵에 접근할 수 있다`() {
+    @DisplayName("맵에 접근할 수 있다")
+    fun access_map() {
         // Given
         val map = mapOf("name" to "John", "age" to 123)
         val context = StandardEvaluationContext(map)
@@ -89,7 +95,8 @@ class AccessTest {
     }
 
     @Test
-    fun `타입에 접근할 수 있다`() {
+    @DisplayName("타입에 접근할 수 있다")
+    fun access_type() {
         // When
         val stringClass = parse("T(String)")
         val integerClass = parse("T(Integer)")
@@ -102,7 +109,8 @@ class AccessTest {
     }
 
     @Test
-    fun `정적 메서드에 접근할 수 있다`() {
+    @DisplayName("정적 메서드에 접근할 수 있다")
+    fun access_static_method() {
         // When
         val ten = parse("T(java.lang.Math).min(10, 20)")
 
