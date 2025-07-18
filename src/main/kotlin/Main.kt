@@ -3,5 +3,15 @@ package com.galacsh
 import org.springframework.core.SpringVersion
 
 fun main() {
-    println(SpringVersion.getVersion())
+    val message = """
+        
+        ==========================================
+        Spring Framework Version: ${SpringVersion.getVersion() ?: "Unknown"}
+        Run tests with:
+            ./gradlew test
+        ==========================================
+        
+    """.trimIndent()
+
+    println(message)
 }
