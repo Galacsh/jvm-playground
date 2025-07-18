@@ -1,1 +1,1 @@
-# Spring Playground
+# JVM Playground
